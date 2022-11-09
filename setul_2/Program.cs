@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel;
+using System.Numerics;
+using System.Runtime.CompilerServices;
 
 int ui;
 Console.WriteLine("Introduceti numarul problemei:");
@@ -66,17 +68,17 @@ if (ui == 12)
 if (ui == 13)
 {
     Console.WriteLine($"Ati accesat problema {ui}");
-    //p13();
+    p13();
 }
 if (ui == 14)
 {
     Console.WriteLine($"Ati accesat problema {ui}");
-    //p14();
+    p14();
 }
 if (ui == 15)
 {
     Console.WriteLine($"Ati accesat problema {ui}");
-    //p15();
+    p15();
 }
 if (ui == 16)
 {
@@ -315,3 +317,82 @@ void p12()
         Console.WriteLine(nr);
 
  }
+void p13()
+{
+    int n = int.Parse(Console.ReadLine());
+    int x1 = int.Parse(Console.ReadLine());
+    int prim = x1;
+    int bec = 0;
+    for (int i = 1; i < n; i++)
+    {
+        int x2 = int.Parse(Console.ReadLine());
+        if (x1 > x2)
+        {
+            bec++;
+        }
+        x1 = x2;
+    }
+    if (bec == 1 && prim > x1)
+    {
+        Console.WriteLine($"Secventa este crescatoare rotita");
+    }
+    else Console.WriteLine($"Secventa nu este crescatoare rotita");
+}
+void p14()
+{
+    int n = int.Parse(Console.ReadLine());
+    int x1 = int.Parse(Console.ReadLine());
+    int prim = x1;
+    int bec1 = 0;
+    int bec2 = 0;
+    for (int i = 1; i < n; i++)
+    {
+        int x2 = int.Parse(Console.ReadLine());
+        if (x1 > x2)
+        {
+            bec1++;
+        }
+        if (x1 < x2)
+        {
+            bec2++;
+        }
+        x1 = x2;
+    }
+    if ((bec1 == 1 && prim > x1) ^ (bec2 == 1 && prim < x1))
+    {
+        Console.WriteLine($"Secventa este monotona rotita");
+    }
+    else Console.WriteLine($"Secventa nu este monotona rotita");
+}
+void p15()
+{
+    int n = int.Parse(Console.ReadLine());
+    int x1 = int.Parse(Console.ReadLine());
+    int bec = 0;
+    int contor = 0;
+    int schimbare = 0;
+    for (int i = 1; i < n; i++)
+    {
+        int x2 = int.Parse(Console.ReadLine());
+        if (x1 == x2) { }
+        else 
+        {
+            if(bec ==)
+            if (x1 < x2)
+            {
+                bec = 1;
+                contor = 0;
+            }
+            if (x1 > x2)
+            {
+                bec = 0;
+                contor = 1;
+            }
+        }
+        x1 = x2;
+    }
+    if (bec == 0)
+        Console.WriteLine($"Secventa este bitonica");
+    else
+        Console.WriteLine($"Secventa nu este bitonica");
+}
