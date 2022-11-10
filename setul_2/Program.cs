@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 
@@ -83,12 +84,13 @@ if (ui == 15)
 if (ui == 16)
 {
     Console.WriteLine($"Ati accesat problema {ui}");
-    //p16();
+    p16();
 }
+
 if (ui == 17)
 {
     Console.WriteLine($"Ati accesat problema {ui}");
-    //p17();
+    p17();
 }
 
 void p1()
@@ -366,33 +368,143 @@ void p14()
 }
 void p15()
 {
+    int n, x, y;
+    bool? crescator = null;
+    bool ok = true, switched = false;
+    n = int.Parse(Console.ReadLine());
+    x = int.Parse(Console.ReadLine());
+    for (int i = 1; i < n; i++)
+    {
+        y = int.Parse(Console.ReadLine());
+        if (x < y)
+        {
+            if (!crescator.HasValue)
+            {
+                crescator = true;
+            }
+            else if (!crescator.Value && !switched)
+            {
+                switched = true;
+                crescator = true;
+            }
+            else if (!crescator.Value && switched)
+            {
+                ok = false;
+            }
+        }
+        if (x > y)
+        {
+            if (!crescator.HasValue)
+            {
+                crescator = false;
+            }
+            else if (crescator.Value && !switched)
+            {
+                switched = true;
+                crescator = false;
+            }
+            else if (crescator.Value && switched)
+            {
+                ok = false;
+            }
+        }
+        x = y;
+    }
+    if (ok && switched == true)
+    {
+        Console.WriteLine("Secventa este bitonica");
+    }
+    else
+    {
+        Console.WriteLine("Secventa nu este bitonica");
+    }
+}
+
+void p16()
+{
     int n = int.Parse(Console.ReadLine());
     int x1 = int.Parse(Console.ReadLine());
-    int bec = 0;
-    int contor = 0;
-    int schimbare = 0;
+    bool? crescator = null;
+    bool ok = true, switched = false;
+    int prim = x1;
+    int bec1 = 0;
+    int bec2 = 0;
     for (int i = 1; i < n; i++)
     {
         int x2 = int.Parse(Console.ReadLine());
-        if (x1 == x2) { }
-        else 
+        if (x1 > x2)
         {
-            if(bec ==)
-            if (x1 < x2)
+            bec1++;
+        }
+        if (x1 < x2)
+        {
+            bec2++;
+        }
+        x1 = x2;
+        if (x1 < x2)
+        {
+            if (!crescator.HasValue)
             {
-                bec = 1;
-                contor = 0;
+                crescator = true;
             }
-            if (x1 > x2)
+            else if (!crescator.Value && !switched)
             {
-                bec = 0;
-                contor = 1;
+                switched = true;
+                crescator = true;
+            }
+            else if (!crescator.Value && switched)
+            {
+                ok = false;
+            }
+        }
+        if (x1 > x2)
+        {
+            if (!crescator.HasValue)
+            {
+                crescator = false;
+            }
+            else if (crescator.Value && !switched)
+            {
+                switched = true;
+                crescator = false;
+            }
+            else if (crescator.Value && switched)
+            {
+                ok = false;
             }
         }
         x1 = x2;
     }
-    if (bec == 0)
-        Console.WriteLine($"Secventa este bitonica");
+    if ((bec1 == 1 && prim > x1) ^ (bec2 == 1 && prim < x1) && ok && switched == true)
+    {
+        Console.WriteLine($"Secventa este bitonica rotita");
+    }
     else
-        Console.WriteLine($"Secventa nu este bitonica");
+        Console.WriteLine($"Secventa nu este bitonica rotita");
 }
+void p17()
+{
+    string[] t =Console.ReadLine().Split(' ');
+    int zero = 0;
+    int unu = 0;
+    int a = 0;
+    for(int i=0; i < t.Length; i++)
+    {
+        a = int.Parse(t[i]);
+        if(a == 0)
+        {
+            zero++;
+        }
+        if(a == 1)
+        {
+            unu++;
+            if (i == 0) { break; }
+        }
+    }
+    if (unu == zero && a != 0)
+        Console.WriteLine($"Secventa este corecta");
+    else
+        Console.WriteLine($"Secventa este incorecta");
+}
+
+//()(()())
